@@ -1,0 +1,15 @@
+.square__grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    .square {
+        background: lightblue;
+        width: 200px;
+        height: 200px;
+        margin: 20px;
+        &.big {
+            height: 300px;
+        }
+    }
+}

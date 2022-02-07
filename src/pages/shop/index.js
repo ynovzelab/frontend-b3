@@ -9,7 +9,7 @@ const Index = () => {
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
-      });
+      },[]);
   });
 
   return (
@@ -18,7 +18,7 @@ const Index = () => {
       <div className="products__grid">
         {products &&
           products.map((product) => (
-            <div className="product__card">
+            <div className="product__card" key={product.id}>
               <p>{product.title}</p>
             </div>
           ))}
