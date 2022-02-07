@@ -25,6 +25,9 @@ const Header = () => {
               <a className="nav__link">Shop</a>
             </Link>
           </li>
+          <li>
+            <button className="btn btn__color-white">login</button>
+          </li>
         </ul>
       </nav>
     </header>

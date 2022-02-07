@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import TitlePage from "../../components/TitlePage";
-
+import ProductCard from "../../components/ProductCard";
 const Index = () => {
   const [products, setProducts] = useState();
 
@@ -18,9 +18,7 @@ const Index = () => {
       <div className="products__grid">
         {products &&
           products.map((product) => (
-            <div className="product__card" key={product.id}>
-              <p>{product.title}</p>
-            </div>
+           <ProductCard product={product} key={product.id}/>
           ))}
       </div>
     </div>
