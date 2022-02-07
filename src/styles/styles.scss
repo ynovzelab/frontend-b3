@@ -1,4 +1,10 @@
+//Helpers
 @import './helpers/variables';
+//Base
 @import './base/base';
+//Themes
 @import './theme/title';
+@import './theme/text-align';
+//Layout
 @import './layout/header';
+@import './layout/footer';

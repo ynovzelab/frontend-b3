@@ -2,9 +2,9 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <div>
-            
-        </div>
+        <footer className="footer__main">
+            <p className="text__center">Copyright © Nike</p>
+        </footer>
     );
 }
 

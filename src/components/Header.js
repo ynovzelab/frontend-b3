@@ -3,10 +3,8 @@ import Link from "next/link";
 import LogoNike from "../public/logo-nike.png";
 
 const Header = () => {
-  console.log(LogoNike);
-
   return (
-    <div className="header__main">
+    <header className="header__main">
       <div className="header__logo">
         <img src={LogoNike.src} alt="nike" />
       </div>
@@ -22,9 +20,14 @@ const Header = () => {
               <a className="nav__link">About</a>
             </Link>
           </li>
+          <li className="nav__item">
+            <Link href="/shop">
+              <a className="nav__link">Shop</a>
+            </Link>
+          </li>
         </ul>
       </nav>
-    </div>
+    </header>
   );
 };
 
