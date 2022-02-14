@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
 import LogoNike from "../public/logo-nike.png";
-
+import Button from "./Button";
 const Header = () => {
   return (
     <header className="header__main">
@@ -26,7 +26,7 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <button className="btn btn__color-white">login</button>
+            <Button type="button" classes="btn btn__color-white" function={() => console.log("islogged")} title="login" />
           </li>
         </ul>
       </nav>
