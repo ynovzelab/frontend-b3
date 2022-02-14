@@ -9,8 +9,9 @@ const Index = () => {
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
-      },[]);
-  });
+      })
+    .catch(err=>console.log(err))
+  },[]);
 
   return (
     <div className="page__shop">

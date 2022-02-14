@@ -10,18 +10,32 @@ const Index = () => {
 
   useEffect(() => {
     const id = router.query.id;
-
     fetch(`https://fakestoreapi.com/products/${id}`)
       .then((res) => {
         return res.json();
       })
       .then((data) => {
         setProduct(data);
-      });
+      })
+      .catch(err=>console.log(err))
   }, []);
 
-  const addTocart = (element) => {
-    console.log(element);
+    
+    const addTocart = (element) => { 
+        const cartArray = [];
+        if (localStorage.getItem('cart')) {
+            const localStorageCart = JSON.parse(localStorage.getItem('cart'));
+            localStorageCart.forEach(product => {
+                cartArray.push(product);    
+            });
+            cartArray.push(element);
+            console.log(cartArray);
+            localStorage.setItem('cart', JSON.stringify(cartArray));
+        }
+        else {
+            cartArray.push(element);
+            localStorage.setItem('cart', JSON.stringify(cartArray));
+        }
   };
 
   return (
