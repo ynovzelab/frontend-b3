@@ -41,8 +41,6 @@ const Index = () => {
         cartArray.push(product);
       });
 
-      console.log(cartArray);
-
       const indexOfExistingProduct = cartArray.findIndex((el) => el.id === element.id);
 
       if (indexOfExistingProduct !== -1) {

@@ -22,6 +22,9 @@ const Index = () => {
               <tr>
                 <th>Titre</th>
                 <th>Prix</th>
+                <th>Quantité</th>
+                <th>Total</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -29,10 +32,20 @@ const Index = () => {
                 <tr key={cartItem.id}>
                   <td>{cartItem.title}</td>
                   <td>{cartItem.price}</td>
+                  <td>
+                    <button>-</button>
+                    {cartItem.quantity}
+                    <button>+</button>
+                  </td>
+                  <td>{cartItem.price * cartItem.quantity}</td>
+                  {/* .Filter() */}
+                  <td><button>Supprimer</button></td>
                 </tr>
               ))}
             </tbody>
           </table>
+          {/* reduce() */}
+          <p>Total : { }</p>
           <Button
             title="Supprimer le panier"
             classes="btn btn__color-white"
