@@ -8,6 +8,7 @@ const Index = () => {
   const router = useRouter();
   const [product, setProduct] = useState();
 
+
   useEffect(() => {
     const id = router.query.id;
     fetch(`https://fakestoreapi.com/products/${id}`)
@@ -17,25 +18,46 @@ const Index = () => {
       .then((data) => {
         setProduct(data);
       })
-      .catch(err=>console.log(err))
+      .catch((err) => console.log(err));
   }, []);
 
+  const addTocart = (element) => {
+    //On créé un nouvel object avec une nouvelle propriété quantity
+    let productToInsert = {
+      id: element.id,
+      title: element.title,
+      image: element.image,
+      price: element.price,
+      quantity: 1
+    };
     
-    const addTocart = (element) => { 
-        const cartArray = [];
-        if (localStorage.getItem('cart')) {
-            const localStorageCart = JSON.parse(localStorage.getItem('cart'));
-            localStorageCart.forEach(product => {
-                cartArray.push(product);    
-            });
-            cartArray.push(element);
-            console.log(cartArray);
-            localStorage.setItem('cart', JSON.stringify(cartArray));
-        }
-        else {
-            cartArray.push(element);
-            localStorage.setItem('cart', JSON.stringify(cartArray));
-        }
+    const cartArray = [];
+
+    //Si j'ai déjà un ou des produits dans mon localstorage
+    if (localStorage.getItem("cart")) {
+
+      const localStorageCart = JSON.parse(localStorage.getItem("cart"));
+      localStorageCart.forEach((product) => {
+        cartArray.push(product);
+      });
+
+      console.log(cartArray);
+
+      const indexOfExistingProduct = cartArray.findIndex((el) => el.id === element.id);
+
+      if (indexOfExistingProduct !== -1) {
+        cartArray[indexOfExistingProduct].quantity += 1;
+      }
+      else {
+        cartArray.push(productToInsert);
+      }
+      localStorage.setItem("cart", JSON.stringify(cartArray));
+    }
+    //Si localstorage vide
+    else {
+      cartArray.push(productToInsert);
+      localStorage.setItem("cart", JSON.stringify(cartArray));
+    }
   };
 
   return (
