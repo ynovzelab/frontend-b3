@@ -1,14 +1,15 @@
 import React, {useState} from "react";
 import Input from "../../components/input";
 import Button from "../../components/Button";
-
+import userService from "../../services/user.service";
 const Index = () => {
 
   const [user, setUser] = useState({});
 
     const submitRegister = (e) => {
-        e.preventDefault();
-        console.log(user);
+      e.preventDefault();
+      console.log(user);
+      userService.register(user).then(data => console.log(data)).catch(err => console.log(err));
     }
   return (
     <div className="page__register">
@@ -32,6 +33,16 @@ const Index = () => {
           required={true}
           placeholder="Veuillez saisir votre nom de famille"
           handleChange={(e) => setUser({...user, lastName:e.target.value})}
+              />
+        <Input
+          label="Username"
+          name="username"
+          id="username"
+          type="text"
+          classes="form__input"
+          required={true}
+          placeholder="Veuillez saisir votre nom de famille"
+          handleChange={(e) => setUser({...user, username:e.target.value})}
               />
         <Input
           label="Email"

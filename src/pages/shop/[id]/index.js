@@ -3,23 +3,23 @@ import { useRouter } from "next/router";
 import TitlePage from "../../../components/TitlePage";
 import ProductPrice from "../../../components/ProductPrice";
 import Button from "../../../components/Button";
+import productService from "../../../services/product.service";
 
 const Index = () => {
+
   const router = useRouter();
   const [product, setProduct] = useState();
 
-
   useEffect(() => {
+    if(!router.isReady) return;
     const id = router.query.id;
-    fetch(`https://fakestoreapi.com/products/${id}`)
-      .then((res) => {
-        return res.json();
-      })
+      productService.getProduct(id)
       .then((data) => {
-        setProduct(data);
+        console.log(data.data.attributes,"DATA");
+        setProduct(data.data);
       })
-      .catch((err) => console.log(err));
-  }, []);
+      .catch((err) => console.log(err));      
+  }, [router.isReady]);
 
   const addTocart = (element) => {
     //On créé un nouvel object avec une nouvelle propriété quantity
@@ -60,9 +60,9 @@ const Index = () => {
 
   return (
     <div className="product_page">
-      <TitlePage title={product && product.title} />
+      <TitlePage title={product && product.attributes.title} />
       <div className="text__center">
-        <ProductPrice price={product && product.price} currency="€" />
+        <ProductPrice price={product && product.attributes.price} currency="€" />
         <Button
           type="button"
           classes="btn btn__color-black"

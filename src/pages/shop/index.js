@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import TitlePage from "../../components/TitlePage";
 import ProductCard from "../../components/ProductCard";
+import productService from "../../services/product.service";
+
 const Index = () => {
   const [products, setProducts] = useState();
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((res) => res.json())
+    productService.getProducts()
       .then((data) => {
-        setProducts(data);
+        console.log(data.data);
+        setProducts(data.data);
       })
     .catch(err=>console.log(err))
   },[]);

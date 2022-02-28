@@ -22,11 +22,11 @@ const Productcard = (props) => {
     return (
         <div className="product__card">
               <div className="product__img">
-                <img src={props.product.image} alt={props.product.title} />
+                <img src={`http://localhost:1337${props.product.attributes.image.data.attributes.url}`} alt={props.product.attributes.title} />
               </div>
               <div className="product__data">
-                <h2>{props.product.title}</h2>
-                <p>{props.product.price} € </p>
+                <h2>{props.product.attributes.title}</h2>
+                <p>{props.product.attributes.price} € </p>
                 <p>
                   <Link href={`/shop/${props.product.id}`}>
                   {/* <Link href={'/shop/' + props.product.id} */}
