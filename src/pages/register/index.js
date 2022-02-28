@@ -1,12 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import Input from "../../components/input";
 import Button from "../../components/Button";
 
 const Index = () => {
+
+  const [user, setUser] = useState({});
+
     const submitRegister = (e) => {
-        console.log(e);
         e.preventDefault();
-        console.log("send");
+        console.log(user);
     }
   return (
     <div className="page__register">
@@ -19,7 +21,7 @@ const Index = () => {
           classes="form__input"
           required={true}
           placeholder="Veuillez saisir votre prénom"
-          handleChange={(e) => console.log(e)}
+          handleChange={(e) => setUser({...user, firstName:e.target.value})}
         />
         <Input
           label="Nom"
@@ -29,7 +31,27 @@ const Index = () => {
           classes="form__input"
           required={true}
           placeholder="Veuillez saisir votre nom de famille"
-          handleChange={(e) => console.log(e)}
+          handleChange={(e) => setUser({...user, lastName:e.target.value})}
+              />
+        <Input
+          label="Email"
+          name="email"
+          id="email"
+          type="email"
+          classes="form__input"
+          required={true}
+          placeholder="Veuillez saisir votre nom de famille"
+          handleChange={ (e) => setUser({...user, email:e.target.value})}
+              />
+        <Input
+          label="Mot de passe"
+          name="password"
+          id="password"
+          type="password"
+          classes="form__input"
+          required={true}
+          placeholder="Veuillez saisir votre nom de famille"
+          handleChange={(e) => setUser({...user, password:e.target.value})}
               />
         <Button title="envoyer" classes="btn btn__color-black" type="submit"/>
       </form>
