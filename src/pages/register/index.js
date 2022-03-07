@@ -2,17 +2,38 @@ import React, {useState} from "react";
 import Input from "../../components/input";
 import Button from "../../components/Button";
 import userService from "../../services/user.service";
-const Index = () => {
+import { useRouter } from 'next/router'
+import Modal from "../../components/Modal";
 
+const Index = () => {
+  const router = useRouter()
   const [user, setUser] = useState({});
 
     const submitRegister = (e) => {
       e.preventDefault();
-      console.log(user);
-      userService.register(user).then(data => console.log(data)).catch(err => console.log(err));
+      userService.register(user)
+        .then(
+          (data) => {
+            console.log(data);
+            localStorage.setItem('jwt', data.jwt);
+            router.push('/profil')
+          }
+        )
+        .catch(
+          (err) => {
+            console.log(err)
+          });
     }
   return (
     <div className="page__register">
+      <Modal title="Titre modal">
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+      </Modal>
+      <div className="square">
+      </div>
+      <div className="square">
+      </div>
       <form className="form" onSubmit={(e)=> submitRegister(e)}>
         <Input
           label="Prénom"
@@ -41,7 +62,7 @@ const Index = () => {
           type="text"
           classes="form__input"
           required={true}
-          placeholder="Veuillez saisir votre nom de famille"
+          placeholder="Veuillez saisir votre username"
           handleChange={(e) => setUser({...user, username:e.target.value})}
               />
         <Input
@@ -51,7 +72,7 @@ const Index = () => {
           type="email"
           classes="form__input"
           required={true}
-          placeholder="Veuillez saisir votre nom de famille"
+          placeholder="Veuillez saisir votre nom email"
           handleChange={ (e) => setUser({...user, email:e.target.value})}
               />
         <Input
@@ -61,7 +82,7 @@ const Index = () => {
           type="password"
           classes="form__input"
           required={true}
-          placeholder="Veuillez saisir votre nom de famille"
+          placeholder="Veuillez saisir votre mot de passe"
           handleChange={(e) => setUser({...user, password:e.target.value})}
               />
         <Button title="envoyer" classes="btn btn__color-black" type="submit"/>
