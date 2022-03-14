@@ -11,12 +11,19 @@ export default {
 		}).then((res) => res.json());
 	},
 	login(payload) {
-		return fetch(``, {
+		return fetch(`${apiUrl}/auth/local/`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "Application/json",
 			},
 			body: JSON.stringify(payload),
-		}).then(res=>res.json())
+		}).then((res) => res.json());
+	},
+	getMe(jwt) {
+		return fetch(`${apiUrl}/users/me`, {
+			headers: {
+                "Authorization" : `Bearer ${jwt}`
+			},
+		}).then((res) => res.json());
 	},
 };

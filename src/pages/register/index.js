@@ -23,7 +23,7 @@ const Index = () => {
             // je redirige l'utilisateur sur sa page profil et je stocke le jwt pour
             // accéder à ses informations
             else {
-              localStorage.setItem('jwt', data.jwt);
+              localStorage.setItem('token', data.jwt);
               router.push('/profil')
             }
           }
