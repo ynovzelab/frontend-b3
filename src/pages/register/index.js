@@ -8,27 +8,37 @@ import Modal from "../../components/Modal";
 const Index = () => {
   const router = useRouter()
   const [user, setUser] = useState({});
+  const [showModal, setShowModal] = useState(false);
 
     const submitRegister = (e) => {
       e.preventDefault();
       userService.register(user)
         .then(
           (data) => {
-            console.log(data);
-            localStorage.setItem('jwt', data.jwt);
-            router.push('/profil')
+            // si réponse contient des erreurs, j'affiche ma modal
+            if (data.error) {
+              setShowModal(true);
+            }
+            // sinon (si mon utilisateur est inscrit), 
+            // je redirige l'utilisateur sur sa page profil et je stocke le jwt pour
+            // accéder à ses informations
+            else {
+              localStorage.setItem('jwt', data.jwt);
+              router.push('/profil')
+            }
           }
         )
         .catch(
+          //Dans le cas où on aurait des erreurs de type server j'affiche ma modal
           (err) => {
+            setShowModal(true);
             console.log(err)
           });
     }
   return (
     <div className="page__register">
-      <Modal title="Titre modal">
-        <p>Paragraph 1</p>
-        <p>Paragraph 2</p>
+      <Modal title="Erreur" isActive={showModal} closeFunction={()=>setShowModal(!showModal)} type="information">
+        <p>Une erreur est survenue, veuillez contacter le service client.</p>
       </Modal>
       <div className="square">
       </div>
